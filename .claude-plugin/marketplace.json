@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "repo-roast-skill",
+  "description": "Get your repo roasted by a panel of six brutally honest senior engineers. Every jab comes with evidence and a fix.",
+  "owner": { "name": "Vivek Bhange", "url": "https://github.com/vivekbhange-hub" },
+  "plugins": [
+    {
+      "name": "repo-roast-skill",
+      "description": "Six judge agents (security, performance, newcomer, maintainer, product, ops) roast your repo, PR or README with a file:line and a fix for every jab, then score it, rank the fixes, render a shareable SVG scorecard and show the before and after once you fix things.",
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/vivekbhange-hub/repo-roast-skill"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "judge": "security",
+    "persona": "The Paranoid",
+    "score": 3.5,
+    "rubric": {"Secrets hygiene": 0, "Injection & unsafe calls": 0.5, "Dependencies": 1,
+               "Auth & access control": 1, "Safe defaults": 1},
+    "verdict": "Recipe search sends user input straight to SQL. Bon appetit, attackers.",
+    "praise": "Passwords are hashed with bcrypt at a sensible cost factor (snackstack/auth.py:18).",
+    "roasts": [
+      {"line": "A live-looking Stripe key is committed in settings.py. It is not a secret if the whole internet has it.",
+       "evidence": "snackstack/settings.py:12",
+       "fix": "Rotate the key at the provider today, load it from STRIPE_KEY in the environment, add it to .env.example as a placeholder.",
+       "impact": "high", "effort": "S"},
+      {"line": "search() builds SQL with an f-string. Somewhere, a user named '; DROP TABLE recipes;-- is warming up.",
+       "evidence": "snackstack/search.py:41",
+       "fix": "Use a parameterised query: cursor.execute(\"... WHERE title LIKE ?\", (f\"%{term}%\",)).",
+       "impact": "high", "effort": "S"},
+      {"line": "DEBUG = True ships to production, so every crash hands visitors a free tour of the stack trace.",
+       "evidence": "snackstack/settings.py:4",
+       "fix": "Read DEBUG from the environment and default it to False.",
+       "impact": "medium", "effort": "S"}
+    ]
+  },
+  {
+    "judge": "performance",
+    "persona": "The Stopwatch",
+    "score": 5.5,
+    "rubric": {"Data access": 0.5, "Algorithms on hot paths": 1, "IO & concurrency": 1.5,
+               "Payload & footprint": 1, "Resource use & caching": 1.5},
+    "verdict": "One query per ingredient per recipe. The database has filed for overtime.",
+    "praise": "Image thumbnails are generated once at upload and cached (snackstack/images.py:55).",
+    "roasts": [
+      {"line": "The recipe list fetches ingredients one recipe at a time: 50 recipes, 51 queries, one tired database.",
+       "evidence": "snackstack/api/recipes.py:88-95",
+       "fix": "Fetch ingredients for all listed recipes in one query (WHERE recipe_id IN (...)) and group in memory.",
+       "impact": "high", "effort": "M"},
+      {"line": "GET /recipes has no limit, so the homepage downloads the entire cookbook on every visit.",
+       "evidence": "snackstack/api/recipes.py:72",
+       "fix": "Add limit and cursor parameters with a default page size of 20.",
+       "impact": "medium", "effort": "S"}
+    ]
+  },
+  {
+    "judge": "newcomer",
+    "persona": "The New Hire",
+    "score": 6.0,
+    "rubric": {"First impression": 1.5, "Setup path": 0.5, "Run & verify": 1,
+               "Naming & navigation": 1.5, "Help on hand": 1.5},
+    "verdict": "Lovely pitch, then step 3 sends me to a script that does not exist.",
+    "praise": "The first paragraph says exactly who it is for and what it does (README.md:3).",
+    "roasts": [
+      {"line": "Step 3 says `make seed`. The Makefile has never heard of seed. Day one, hour one.",
+       "evidence": "README.md:31",
+       "fix": "Add a seed target to the Makefile that runs scripts/seed.py, or change the README to the command that exists.",
+       "impact": "high", "effort": "S"},
+      {"line": "The app needs DATABASE_URL, but the only place that says so is a KeyError.",
+       "evidence": "snackstack/db.py:9",
+       "fix": "Add .env.example listing DATABASE_URL and STRIPE_KEY, and fail with a message that names the missing variable.",
+       "impact": "medium", "effort": "S"}
+    ]
+  },
+  {
+    "judge": "maintainer",
+    "persona": "The Greybeard",
+    "score": 4.0,
+    "rubric": {"Tests": 0.5, "CI & automation": 0, "Structure": 1, "Error handling": 1, "Hygiene": 1.5},
+    "verdict": "utils.py is 1,212 lines. It is not a module, it is a lifestyle.",
+    "praise": "Commit history is readable; the last 50 messages say what changed.",
+    "roasts": [
+      {"line": "No CI at all. The test suite runs whenever someone remembers, which is never.",
+       "evidence": "facts.ci.files",
+       "fix": "Add .github/workflows/test.yml running pytest on pull requests.",
+       "impact": "high", "effort": "S"},
+      {"line": "`except Exception: pass` in the importer. Whatever went wrong, it has taken it to the grave.",
+       "evidence": "snackstack/importer.py:64",
+       "fix": "Catch the specific parse error, log the recipe id and the reason, and count failures in the import summary.",
+       "impact": "medium", "effort": "S"},
+      {"line": "utils.py holds dates, money, slugs, emails and a hand-rolled CSV parser. Everything is a util if you believe hard enough.",
+       "evidence": "snackstack/utils.py:1-1212",
+       "fix": "Split by topic into dates.py, money.py, text.py; replace the CSV parser with the csv module.",
+       "impact": "medium", "effort": "L"}
+    ]
+  },
+  {
+    "judge": "product",
+    "persona": "The User",
+    "score": 6.5,
+    "rubric": {"Problem clarity": 2, "Promises kept": 1, "Interface ergonomics": 1.5,
+               "Error messages": 0.5, "Accessibility & polish": 1.5},
+    "verdict": "'Something went wrong' is not an error message, it is a weather report.",
+    "praise": "The API returns consistent JSON shapes with clear field names (snackstack/api/schemas.py:1).",
+    "roasts": [
+      {"line": "The README promises 'export your cookbook as PDF'. The code promises nothing of the sort.",
+       "evidence": "README.md:12",
+       "fix": "Remove the claim until the export exists, or move it to a Roadmap section.",
+       "impact": "medium", "effort": "S"},
+      {"line": "Every API failure returns {\"error\": \"Something went wrong\"}, including a typo in the recipe id.",
+       "evidence": "snackstack/api/errors.py:22",
+       "fix": "Return a specific message and code per case: 404 'recipe 812 not found', 422 with the invalid field.",
+       "impact": "medium", "effort": "M"},
+      {"line": "Users probably hate the onboarding.",
+       "evidence": "vibes",
+       "fix": "Ask some users.",
+       "impact": "low", "effort": "M"}
+    ]
+  },
+  {
+    "judge": "ops",
+    "persona": "The On-Call",
+    "score": 5.0,
+    "rubric": {"Configuration": 0.5, "Logging & observability": 1, "Failure handling": 1,
+               "Build & deploy": 1, "Release hygiene": 1.5},
+    "verdict": "FROM python:latest. A build that changes every week, like a mystery box.",
+    "praise": "There is a CHANGELOG and it is actually up to date (CHANGELOG.md:1).",
+    "roasts": [
+      {"line": "The Dockerfile pins nothing and runs as root, so every rebuild is a surprise with admin rights.",
+       "evidence": "Dockerfile:1",
+       "fix": "Pin python:3.12-slim, add a non-root user, and add a .dockerignore.",
+       "impact": "medium", "effort": "S"},
+      {"line": "The nutrition API call has no timeout. It will wait forever, which is longer than my shift.",
+       "evidence": "snackstack/nutrition.py:30",
+       "fix": "Pass timeout=5 to requests.get and return a cached value or a clear 503 when it expires.",
+       "impact": "medium", "effort": "S"}
+    ]
+  }
+]
