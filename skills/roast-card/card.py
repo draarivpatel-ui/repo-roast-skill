@@ -27,7 +27,7 @@ from xml.sax.saxutils import escape
 
 WIDTH, HEIGHT = 1200, 630
 MAX_JUDGES = 6
-REPO_CHARS = 36
+REPO_CHARS = 64  # longer names shrink the title font before anything is cut
 QUOTE_CHARS = 74
 NAME_CHARS = 30
 HEADLINE_LINE_CHARS = 34
@@ -125,6 +125,11 @@ def delta_color(before: float, after: float) -> str:
     return "#2f855a" if d > 0 else ("#c62828" if d < 0 else MUTED)
 
 
+def repo_font_size(repo: str) -> int:
+    """42px fits about 40 bold characters across the card; scale down for longer names."""
+    return 42 if len(repo) <= 40 else max(26, int(42 * 40 / len(repo)))
+
+
 def render(data: dict) -> str:
     repo = truncate(data.get("repo") or "this repo", REPO_CHARS)
     overall = clamp(data.get("overall"))
@@ -149,7 +154,7 @@ def render(data: dict) -> str:
 
     # Header
     add(f'<text x="60" y="70" font-size="18" font-weight="700" letter-spacing="3" fill="{FLAME}">THE ROAST OF</text>')
-    add(f'<text x="60" y="118" font-size="42" font-weight="800" fill="{INK}">{esc(repo)}</text>')
+    add(f'<text x="60" y="118" font-size="{repo_font_size(repo)}" font-weight="800" fill="{INK}">{esc(repo)}</text>')
     if meta:
         add(f'<text x="1140" y="70" font-size="16" fill="{MUTED}" text-anchor="end">{esc(meta)}</text>')
     add(f'<line x1="60" y1="150" x2="1140" y2="150" stroke="{TRACK}" stroke-width="2"/>')

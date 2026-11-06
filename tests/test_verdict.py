@@ -95,6 +95,29 @@ class NormaliseTests(RepoCase):
         self.assertEqual(j["score"], 4.0)
         self.assertTrue(any("rubric total used" in n for n in j["notes"]))
 
+    def test_command_evidence_is_labelled_in_report(self):
+        raws = [judge(roasts=[
+            {"line": "Lint fails", "evidence": "$ npm run lint -> 12 errors", "fix": "Fix lint", "impact": "low", "effort": "S"}
+        ])]
+        md = verdict.render_markdown(verdict.build(raws, repo_name="x", mode="default", date="d", headline=None,
+                                                   bailiff=self.bailiff))
+        self.assertIn("not re-run", md)
+
+    def test_rubric_is_clamped_and_counted(self):
+        j = verdict.normalise_judge(judge(score=10, rubric={"Vibes": 10}), self.bailiff)
+        self.assertEqual(j["score"], 2.0)
+        self.assertTrue(any("1 criteria, expected 5" in n for n in j["notes"]))
+        self.assertTrue(any("clamped" in n for n in j["notes"]))
+
+    def test_fix_today_prefers_leaked_credential(self):
+        top = [
+            {"judge": "newcomer", "impact": "low", "effort": "S", "line": "README typo", "fix": "fix it"},
+            {"judge": "security", "impact": "high", "effort": "M",
+             "line": "A live API key is committed", "fix": "Rotate the key and load it from the environment"},
+        ]
+        self.assertEqual(verdict.pick_fix_today(top)["judge"], "security")
+        self.assertEqual(verdict.pick_fix_today(top[:1])["judge"], "newcomer")
+
     def test_missing_rubric_is_noted(self):
         j = verdict.normalise_judge(judge(score=7, rubric={}), self.bailiff)
         self.assertEqual(j["score"], 7.0)

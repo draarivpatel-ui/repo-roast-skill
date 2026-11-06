@@ -13,7 +13,7 @@ Code reviews are either too polite to be useful or too vague to act on. "Conside
 
 This Claude Code plugin puts your repository in front of six judges, each a subagent with its own personality and its own scoring rubric: **The Paranoid** (security), **The Stopwatch** (performance), **The New Hire** (first-day developer), **The Greybeard** (twenty-year maintainer), **The User** (product and UX) and **The On-Call** (ops and reliability). They read your code in parallel and come back with jokes, scores and fixes.
 
-The catch, and the point: **no evidence, no roast**. Every jab must cite a real `file:line`, a command and its output, or a measured fact about the repo. A script checks every citation against your files and throws out anything that does not hold up, in public, at the bottom of the report. Every score is the sum of a five-part rubric. Tone goes from `--gentle` to `--savage`; the evidence bar never moves.
+The catch, and the point: **no evidence, no roast**. Every jab must cite a real `file:line`, a command and its output, or a measured fact about the repo. A script checks every `file:line` and every fact against your repo and throws out anything that does not hold up, in public, at the bottom of the report. (Command output is quoted as evidence but not re-run, so the report labels it as such.) Every score is the sum of a five-part rubric, capped at 0–2 per criterion. Tone goes from `--gentle` to `--savage`; the evidence bar never moves.
 
 What you get: `roast/ROAST.md` with an overall score, each judge's roast, the top 10 fixes ranked by impact for the effort and the one thing to fix today, plus a 1200x630 SVG scorecard and a README badge you can post. Fix things, run a rematch, and the card shows before and after.
 
@@ -125,7 +125,8 @@ flowchart LR
    fix, impact and effort.
 3. **The bailiff.** `verdict.py` checks every `path:line` exists in your repo and is in range,
    every `facts.<key>` exists, and every roast has a fix. Failures are thrown out and listed.
-   Scores that disagree with their rubric are corrected to the rubric.
+   Rubric values are clamped to 0–2, a rubric without exactly five criteria is flagged, and
+   scores that disagree with their rubric are corrected to the rubric.
 4. **The ranking.** Fixes are ordered by impact divided by effort. The fix for today is the top
    small one, unless a live credential turns up, which always goes first.
 5. **The card.** `card.py` renders the scorecard; `delta.py` adds before and after on a rematch.

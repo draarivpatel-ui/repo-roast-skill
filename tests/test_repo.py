@@ -110,7 +110,7 @@ class ManifestTests(unittest.TestCase):
         data = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(data["name"], REPO_NAME)
         self.assertEqual(data["name"], ROOT.name if ROOT.name == REPO_NAME else REPO_NAME)
-        self.assertEqual(data["version"], "1.0.0")
+        self.assertRegex(data["version"], r"^\d+\.\d+\.\d+$")
         self.assertEqual(data["license"], "MIT")
         self.assertEqual(data["author"]["name"], "Vivek Bhange")
         self.assertTrue(6 <= len(data["keywords"]) <= 10)
@@ -153,7 +153,9 @@ class DocsTests(unittest.TestCase):
         self.assertIn("Copyright (c) 2026 Vivek Bhange", text)
 
     def test_changelog_and_contributing(self):
-        self.assertIn("## [1.0.0] - 2026-11-07", (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"))
+        version = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))["version"]
+        self.assertIn(f"## [{version}] - ", (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"),
+                      "every released version needs a CHANGELOG entry")
         self.assertTrue((ROOT / "CONTRIBUTING.md").exists())
 
     def test_examples_present(self):

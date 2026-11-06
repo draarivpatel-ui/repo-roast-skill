@@ -47,7 +47,7 @@ before and after values. Format:
    above and show it before rendering. If there is nothing to render, suggest `roast-repo` first.
 
 2. **Check the quotes.** Each judge quote is truncated at 74 characters and the headline wraps to
-   two lines of 32 characters, with an ellipsis. If a quote would lose its punchline, shorten it
+   three lines of 34 characters, with an ellipsis. If a quote would lose its punchline, shorten it
    yourself in card.json (keeping the meaning) rather than letting it be cut mid-joke.
 
 3. **Render the card.**

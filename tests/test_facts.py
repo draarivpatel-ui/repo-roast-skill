@@ -23,7 +23,9 @@ class FactsCase(unittest.TestCase):
         self.repo.mkdir()
         self.write("README.md", "# Demo\n\nDoes things.\n")
         self.write("app/main.py", "import os\n# TODO: handle errors\nx = 1  # FIXME later\n"
-                                  "PATTERN = 'TODO|FIXME'\n")
+                                  "PATTERN = 'TODO|FIXME'\n"
+                                  "# a comment that only mentions TODO markers in prose\n"
+                                  "MARK = re.compile(r'(#|//) TODO')\n")
         self.write("app/big.py", "y = 2\n" * 300)
         self.write("app/config.py", f'API_KEY = "{FAKE_AWS}"\ntoken = "{FAKE_GH}"\n'
                                     'password = "changeme-placeholder"\n')
@@ -83,6 +85,7 @@ class GatherTests(FactsCase):
     def test_travis_default_script_counts_as_running_tests(self):
         import tempfile
         for travis, expected in [('language: node_js\nnode_js:\n - "6"\n', True),
+                                 ('language: java\njdk:\n - oraclejdk8\n', True),
                                  ('language: node_js\nscript: echo hi\n', False)]:
             with tempfile.TemporaryDirectory() as d:
                 (Path(d) / ".travis.yml").write_text(travis, encoding="utf-8")

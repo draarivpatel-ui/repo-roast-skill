@@ -51,8 +51,8 @@ TEST_NAME = re.compile(
 )
 TEST_DIRS = {"test", "tests", "__tests__", "spec", "specs", "testing"}
 
-# Markers count only inside comments, so a regex or string that mentions one is not a TODO.
-MARKER = re.compile(r"(?:#|//|/\*|<!--|^\s*\*|^\s*--)[^\n]*?\b(TODO|FIXME|HACK|XXX)\b")
+# A marker counts only when it opens a comment, so prose or a regex that mentions one does not.
+MARKER = re.compile(r"(?:#|//|/\*|<!--|^\s*\*|^\s*--)[ \t]*(TODO|FIXME|HACK|XXX)\b")
 
 SECRET_PATTERNS = [
     ("aws-access-key-id", re.compile(r"\b(?:AKIA|ASIA)[0-9A-Z]{16}\b")),
@@ -322,7 +322,7 @@ def gather(repo: Path) -> dict:
     readme_lines = None
     if readme:
         text = read_text(repo / readme) or ""
-        readme_lines = text.count("\n") + 1
+        readme_lines = len(text.splitlines())
 
     workflows = [f for f in files if f.startswith(".github/workflows/") and f.endswith((".yml", ".yaml"))]
     ci_files = workflows + [f for f in files if f in CI_FILES or f.startswith(".circleci/")]
@@ -332,7 +332,8 @@ def gather(repo: Path) -> dict:
         if re.search(r"\b(test|pytest|jest|vitest|mocha|unittest|go test|cargo test|rspec)\b", text):
             ci_runs_tests = True
         # Travis runs a language's default test command (e.g. `npm test`) when no script: is given.
-        elif (f == ".travis.yml" and re.search(r"^language:\s*(node_js|python|ruby|go|rust)\b", text, re.M)
+        elif (f == ".travis.yml" and re.search(r"^language:\s*(node_js|python|ruby|go|rust|java|scala|clojure|groovy|php|perl|elixir|dart)\b",
+                                                text, re.M)
               and not re.search(r"^script:", text, re.M)):
             ci_runs_tests = True
 

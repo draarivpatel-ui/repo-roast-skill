@@ -1,7 +1,7 @@
 {
   "name": "repo-roast-skill",
   "description": "Get your repo roasted by a panel of six brutally honest senior engineers. Every jab comes with evidence and a fix, every score is justified by a rubric, and the result is a ranked fix list plus a shareable scorecard.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": { "name": "Vivek Bhange", "url": "https://github.com/vivekbhange-hub" },
   "homepage": "https://github.com/vivekbhange-hub/repo-roast-skill",
   "repository": "https://github.com/vivekbhange-hub/repo-roast-skill",

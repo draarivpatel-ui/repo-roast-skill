@@ -122,7 +122,7 @@ class TruncationTests(unittest.TestCase):
 
     def test_long_repo_name_truncated(self):
         svg = card.render(sample(repo="a" * 120))
-        self.assertNotIn("a" * 40, texts(svg))
+        self.assertNotIn("a" * 65, texts(svg))
         self.assertNotIn("a" * 100, svg)
 
     def test_wrap_respects_width_and_lines(self):

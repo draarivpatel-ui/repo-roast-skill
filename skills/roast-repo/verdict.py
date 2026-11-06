@@ -31,6 +31,8 @@ from pathlib import Path
 JUDGE_ORDER = ["security", "performance", "newcomer", "maintainer", "product", "ops"]
 IMPACT = {"high": 3, "medium": 2, "low": 1}
 EFFORT = {"S": 1, "M": 2, "L": 3}
+RUBRIC_CRITERIA = 5   # every judge scores five criteria...
+RUBRIC_MAX = 2.0      # ...from 0 to 2 each, so a score is at most 10
 MODES = {"gentle", "default", "savage"}
 
 # Keep in sync with roast-card/card.py (tests/test_verdict.py checks they agree).
@@ -132,8 +134,14 @@ def normalise_judge(raw: dict, bailiff: Bailiff) -> dict:
     notes = []
     score = clamp_score(raw.get("score"))
     if isinstance(rubric, dict) and rubric:
+        if len(rubric) != RUBRIC_CRITERIA:
+            notes.append(f"rubric has {len(rubric)} criteria, expected {RUBRIC_CRITERIA}")
         try:
-            rubric_total = round(sum(float(v) for v in rubric.values()), 1)
+            values = [float(v) for v in rubric.values()]
+            if any(v < 0 or v > RUBRIC_MAX for v in values):
+                notes.append(f"rubric values outside 0-{RUBRIC_MAX:g} were clamped")
+            rubric = {k: min(max(float(v), 0.0), RUBRIC_MAX) for k, v in rubric.items()}
+            rubric_total = round(sum(rubric.values()), 1)
         except (TypeError, ValueError):
             rubric_total = None
             notes.append("rubric has non-numeric values; score kept as given")
@@ -193,7 +201,15 @@ def rank_fixes(judges: list[dict], limit: int = 10) -> list[dict]:
     return ranked
 
 
+CREDENTIAL_WORDS = re.compile(r"(?i)\b(secret|credential|api[ _-]?key|access[ _-]?key|token|password|private key)s?\b")
+
+
 def pick_fix_today(top: list[dict]) -> dict | None:
+    # A leaked credential always goes first: rotating it can't wait for the effort ranking.
+    for entry in top:
+        if (entry.get("judge") == "security" and entry.get("impact") == "high"
+                and CREDENTIAL_WORDS.search(entry.get("line", "") + " " + entry.get("fix", ""))):
+            return entry
     for entry in top:
         if entry["effort"] == "S":
             return entry
@@ -206,7 +222,10 @@ def load_judges(paths: list[Path]) -> list[dict]:
     for p in paths:
         files.extend(sorted(p.glob("*.json")) if p.is_dir() else [p])
     for f in files:
-        data = json.loads(f.read_text(encoding="utf-8"))
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise SystemExit(f"verdict.py: {f} is not valid JSON: {exc}") from None
         if isinstance(data, list):
             raws.extend(d for d in data if isinstance(d, dict))
         elif isinstance(data, dict) and isinstance(data.get("judges"), list):
@@ -290,7 +309,7 @@ def render_markdown(roast: dict) -> str:
             o.append("")
         for r in j["roasts"]:
             o.append(f"- **{r['line']}**")
-            o.append(f"  - Evidence: `{r['evidence']}`")
+            o.append(f"  - Evidence: `{r['evidence']}`" + (" (command output as reported, not re-run)" if r['evidence'].startswith('$ ') else ""))
             o.append(f"  - Fix: {r['fix']} _(impact {r['impact']}, effort {r['effort']})_")
         if not j["roasts"]:
             o.append("- No admissible roasts.")
