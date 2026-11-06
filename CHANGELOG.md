@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-11-07
+
+### Fixed
+
+- `facts.py` now counts root-level test files such as `test.js`, `tests.py` and `spec.ts`. Before,
+  a repo whose only tests lived in `test.js` was reported as having no tests.
+- `facts.py` now treats a `.travis.yml` with no `script:` as running tests, since Travis runs the
+  language's default test command (for example `npm test`) in that case.
+
 ## [1.0.0] - 2026-11-07
 
 ### Added

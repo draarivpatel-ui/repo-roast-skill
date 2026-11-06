@@ -80,6 +80,15 @@ class GatherTests(FactsCase):
         self.assertEqual(ci["files"], [".github/workflows/ci.yml"])
         self.assertTrue(ci["runs_tests"])
 
+    def test_travis_default_script_counts_as_running_tests(self):
+        import tempfile
+        for travis, expected in [('language: node_js\nnode_js:\n - "6"\n', True),
+                                 ('language: node_js\nscript: echo hi\n', False)]:
+            with tempfile.TemporaryDirectory() as d:
+                (Path(d) / ".travis.yml").write_text(travis, encoding="utf-8")
+                (Path(d) / "index.js").write_text("module.exports = 1;\n", encoding="utf-8")
+                self.assertEqual(facts.gather(Path(d))["ci"]["runs_tests"], expected, travis)
+
     def test_docs(self):
         d = facts.gather(self.repo)["docs"]
         self.assertEqual(d["readme"], "README.md")
@@ -119,9 +128,9 @@ class GatherTests(FactsCase):
 class HelperTests(unittest.TestCase):
     def test_is_test_file(self):
         for p in ["tests/a.py", "src/test_x.py", "pkg/x_test.go", "ui/a.spec.tsx", "spec/models/user_spec.rb",
-                  "src/FooTest.java"]:
+                  "src/FooTest.java", "test.js", "tests.py", "lib/spec.ts"]:
             self.assertTrue(facts.is_test_file(p), p)
-        for p in ["src/app.py", "src/contest.py", "lib/testing_utils_impl.go"]:
+        for p in ["src/app.py", "src/contest.py", "lib/testing_utils_impl.go", "latest.js", "attest.py"]:
             self.assertFalse(facts.is_test_file(p), p)
 
     def test_requirements_parser(self):

@@ -46,7 +46,8 @@ TEXT_EXTRA = {
 
 TEST_NAME = re.compile(
     r"(^test_.*\.py$|_test\.py$|_test\.go$|\.(test|spec)\.[cm]?[jt]sx?$|"
-    r"Tests?\.(java|kt|cs|swift)$|_spec\.rb$|_test\.exs?$|test\.php$)"
+    r"Tests?\.(java|kt|cs|swift)$|_spec\.rb$|_test\.exs?$|test\.php$|"
+    r"^(test|tests|spec)\.(py|[cm]?[jt]sx?)$)"
 )
 TEST_DIRS = {"test", "tests", "__tests__", "spec", "specs", "testing"}
 
@@ -329,6 +330,10 @@ def gather(repo: Path) -> dict:
     for f in ci_files:
         text = (read_text(repo / f) or "").lower()
         if re.search(r"\b(test|pytest|jest|vitest|mocha|unittest|go test|cargo test|rspec)\b", text):
+            ci_runs_tests = True
+        # Travis runs a language's default test command (e.g. `npm test`) when no script: is given.
+        elif (f == ".travis.yml" and re.search(r"^language:\s*(node_js|python|ruby|go|rust)\b", text, re.M)
+              and not re.search(r"^script:", text, re.M)):
             ci_runs_tests = True
 
     non_test_source = [f for f in source_lines if f not in set(test_files)]
