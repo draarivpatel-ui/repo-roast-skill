@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Roast of EnterpriseQualityCoding/FizzBuzzEnterpriseEdition: 4.8 out of 10, Smoke Alarm">
+<title>Roast of EnterpriseQualityCoding/FizzBuzzEnterpriseEdition: 4.8 out of 10, Smoke Alarm</title>
+<defs><linearGradient id="flame" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f59f00"/><stop offset="1" stop-color="#d9480f"/></linearGradient></defs>
+<rect width="1200" height="630" fill="#fffaf3"/>
+<rect width="1200" height="10" fill="url(#flame)"/>
+<g font-family="&apos;Segoe UI&apos;, -apple-system, BlinkMacSystemFont, &apos;Helvetica Neue&apos;, Helvetica, Arial, sans-serif">
+<text x="60" y="70" font-size="18" font-weight="700" letter-spacing="3" fill="#d9480f">THE ROAST OF</text>
+<text x="60" y="118" font-size="34" font-weight="800" fill="#1f2328">EnterpriseQualityCoding/FizzBuzzEnterpriseEdition</text>
+<text x="1140" y="70" font-size="16" fill="#57606a" text-anchor="end">2026-11-07 · savage mode</text>
+<line x1="60" y1="150" x2="1140" y2="150" stroke="#eee3d6" stroke-width="2"/>
+<circle cx="230" cy="320" r="112" fill="none" stroke="#eee3d6" stroke-width="20"/>
+<circle cx="230" cy="320" r="112" fill="none" stroke="#d9480f" stroke-width="20" stroke-linecap="round" stroke-dasharray="337.8 703.7" transform="rotate(-90 230 320)"/>
+<text x="230" y="342" font-size="76" font-weight="800" fill="#1f2328" text-anchor="middle">4.8</text>
+<text x="230" y="378" font-size="20" fill="#57606a" text-anchor="middle">out of 10</text>
+<text x="230" y="482" font-size="28" font-weight="800" fill="#d9480f" text-anchor="middle">Smoke Alarm</text>
+<text x="230" y="518" font-size="18" font-style="italic" fill="#57606a" text-anchor="middle">Two Spring containers and fifteen</text>
+<text x="230" y="544" font-size="18" font-style="italic" fill="#57606a" text-anchor="middle">factories, all to count to 100.</text>
+<text x="470" y="190" font-size="20" font-weight="700" fill="#1f2328">The Paranoid<tspan fill="#57606a" font-weight="400"> · Security</tspan></text>
+<text x="1140" y="190" font-size="22" font-weight="800" text-anchor="end" fill="#2f855a">8.5</text>
+<rect x="470" y="200" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="200" width="569.5" height="8" rx="4" fill="#2f855a"/>
+<text x="470" y="226" font-size="16" font-style="italic" fill="#57606a">“Impossible to inject: it reads no input. Its Spring 3.2 is the risk.”</text>
+<text x="470" y="260" font-size="20" font-weight="700" fill="#1f2328">The Stopwatch<tspan fill="#57606a" font-weight="400"> · Performance</tspan></text>
+<text x="1140" y="260" font-size="22" font-weight="800" text-anchor="end" fill="#b7791f">6.0</text>
+<rect x="470" y="270" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="270" width="402.0" height="8" rx="4" fill="#b7791f"/>
+<text x="470" y="296" font-size="16" font-style="italic" fill="#57606a">“Boots Spring twice to count to 100, then flushes after every word.”</text>
+<text x="470" y="330" font-size="20" font-weight="700" fill="#1f2328">The New Hire<tspan fill="#57606a" font-weight="400"> · Newcomer</tspan></text>
+<text x="1140" y="330" font-size="22" font-weight="800" text-anchor="end" fill="#c62828">3.5</text>
+<rect x="470" y="340" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="340" width="234.5" height="8" rx="4" fill="#c62828"/>
+<text x="470" y="366" font-size="16" font-style="italic" fill="#57606a">“12 classes from main() to the division, and no word on how to run it.”</text>
+<text x="470" y="400" font-size="20" font-weight="700" fill="#1f2328">The Greybeard<tspan fill="#57606a" font-weight="400"> · Maintainer</tspan></text>
+<text x="1140" y="400" font-size="22" font-weight="800" text-anchor="end" fill="#c62828">3.5</text>
+<rect x="470" y="410" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="410" width="234.5" height="8" rx="4" fill="#c62828"/>
+<text x="470" y="436" font-size="16" font-style="italic" fill="#57606a">“Catches Throwable, logs nothing, and calls that &apos;exception safe&apos;.”</text>
+<text x="470" y="470" font-size="20" font-weight="700" fill="#1f2328">The User<tspan fill="#57606a" font-weight="400"> · Product</tspan></text>
+<text x="1140" y="470" font-size="22" font-weight="800" text-anchor="end" fill="#d9480f">4.0</text>
+<rect x="470" y="480" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="480" width="268.0" height="8" rx="4" fill="#d9480f"/>
+<text x="470" y="506" font-size="16" font-style="italic" fill="#57606a">“Promises &apos;customizable&apos;. Ships one setting, 100, and it&apos;s a constant.”</text>
+<text x="470" y="540" font-size="20" font-weight="700" fill="#1f2328">The On-Call<tspan fill="#57606a" font-weight="400"> · Ops</tspan></text>
+<text x="1140" y="540" font-size="22" font-weight="800" text-anchor="end" fill="#c62828">3.0</text>
+<rect x="470" y="550" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="550" width="201.0" height="8" rx="4" fill="#c62828"/>
+<text x="470" y="576" font-size="16" font-style="italic" fill="#57606a">“No logs, no license, no releases, and two build files to keep in sync.”</text>
+<text x="60" y="612" font-size="15" fill="#57606a">Roast the code, never the people. Every jab comes with evidence and a fix.</text>
+<text x="1140" y="612" font-size="15" font-weight="700" fill="#d9480f" text-anchor="end">repo-roast-skill</text>
+</g></svg>

@@ -5,9 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-d9480f.svg)](https://github.com/vivekbhange-hub/repo-roast-skill)
 
-![Example roast card for a fictional repo](examples/card.example.svg)
+[![Roast card: repo-roast-skill roasting itself, 8.3/10](examples/real/self-roast/card.svg)](examples/real/README.md)
 
-<sub>Example card for SnackStack, a made-up repo. Your card is generated from your own roast.</sub>
+<sub>A real roast of this repo, by this repo. Its top finding was right: the release it judged had broken its own CI. See the [real roasts](examples/real/README.md) of this repo, FizzBuzzEnterpriseEdition and left-pad, with every citation checkable.</sub>
 
 Code reviews are either too polite to be useful or too vague to act on. "Consider improving test coverage" changes nothing. "There is no CI, so the test suite runs whenever someone remembers, which is never" gets fixed the same afternoon, especially when it comes with the exact workflow file to add.
 

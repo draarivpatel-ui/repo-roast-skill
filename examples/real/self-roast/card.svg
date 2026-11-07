@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Roast of vivekbhange-hub/repo-roast-skill: 8.3 out of 10, Nicely Done">
+<title>Roast of vivekbhange-hub/repo-roast-skill: 8.3 out of 10, Nicely Done</title>
+<defs><linearGradient id="flame" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f59f00"/><stop offset="1" stop-color="#d9480f"/></linearGradient></defs>
+<rect width="1200" height="630" fill="#fffaf3"/>
+<rect width="1200" height="10" fill="url(#flame)"/>
+<g font-family="&apos;Segoe UI&apos;, -apple-system, BlinkMacSystemFont, &apos;Helvetica Neue&apos;, Helvetica, Arial, sans-serif">
+<text x="60" y="70" font-size="18" font-weight="700" letter-spacing="3" fill="#d9480f">THE ROAST OF</text>
+<text x="60" y="118" font-size="42" font-weight="800" fill="#1f2328">vivekbhange-hub/repo-roast-skill</text>
+<text x="1140" y="70" font-size="16" fill="#57606a" text-anchor="end">2026-11-07 · default mode</text>
+<line x1="60" y1="150" x2="1140" y2="150" stroke="#eee3d6" stroke-width="2"/>
+<circle cx="230" cy="320" r="112" fill="none" stroke="#eee3d6" stroke-width="20"/>
+<circle cx="230" cy="320" r="112" fill="none" stroke="#2f855a" stroke-width="20" stroke-linecap="round" stroke-dasharray="584.1 703.7" transform="rotate(-90 230 320)"/>
+<text x="230" y="342" font-size="76" font-weight="800" fill="#1f2328" text-anchor="middle">8.3</text>
+<text x="230" y="378" font-size="20" fill="#57606a" text-anchor="middle">out of 10</text>
+<text x="230" y="482" font-size="28" font-weight="800" fill="#2f855a" text-anchor="middle">Nicely Done</text>
+<text x="230" y="518" font-size="18" font-style="italic" fill="#57606a" text-anchor="middle">Demands evidence for every jab,</text>
+<text x="230" y="544" font-size="18" font-style="italic" fill="#57606a" text-anchor="middle">then fails its own version check.</text>
+<text x="470" y="190" font-size="20" font-weight="700" fill="#1f2328">The Paranoid<tspan fill="#57606a" font-weight="400"> · Security</tspan></text>
+<text x="1140" y="190" font-size="22" font-weight="800" text-anchor="end" fill="#2f855a">9.0</text>
+<rect x="470" y="200" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="200" width="603.0" height="8" rx="4" fill="#2f855a"/>
+<text x="470" y="226" font-size="16" font-style="italic" fill="#57606a">“Clean scripts. Judges get a shell and no rule against obeying repos.”</text>
+<text x="470" y="260" font-size="20" font-weight="700" fill="#1f2328">The Stopwatch<tspan fill="#57606a" font-weight="400"> · Performance</tspan></text>
+<text x="1140" y="260" font-size="22" font-weight="800" text-anchor="end" fill="#2f855a">8.5</text>
+<rect x="470" y="270" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="270" width="569.5" height="8" rx="4" fill="#2f855a"/>
+<text x="470" y="296" font-size="16" font-style="italic" fill="#57606a">“Linear almost everywhere, except one set rebuilt per file in facts.py.”</text>
+<text x="470" y="330" font-size="20" font-weight="700" fill="#1f2328">The New Hire<tspan fill="#57606a" font-weight="400"> · Newcomer</tspan></text>
+<text x="1140" y="330" font-size="22" font-weight="800" text-anchor="end" fill="#2f855a">8.5</text>
+<rect x="470" y="340" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="340" width="569.5" height="8" rx="4" fill="#2f855a"/>
+<text x="470" y="366" font-size="16" font-style="italic" fill="#57606a">“Clear pitch, two-line install, and Python is a surprise on line 134.”</text>
+<text x="470" y="400" font-size="20" font-weight="700" fill="#1f2328">The Greybeard<tspan fill="#57606a" font-weight="400"> · Maintainer</tspan></text>
+<text x="1140" y="400" font-size="22" font-weight="800" text-anchor="end" fill="#b7791f">7.5</text>
+<rect x="470" y="410" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="410" width="502.5" height="8" rx="4" fill="#b7791f"/>
+<text x="470" y="436" font-size="16" font-style="italic" fill="#57606a">“Tests for every script, and one of them still thinks it&apos;s 1.0.0.”</text>
+<text x="470" y="470" font-size="20" font-weight="700" fill="#1f2328">The User<tspan fill="#57606a" font-weight="400"> · Product</tspan></text>
+<text x="1140" y="470" font-size="22" font-weight="800" text-anchor="end" fill="#2f855a">8.0</text>
+<rect x="470" y="480" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="480" width="536.0" height="8" rx="4" fill="#2f855a"/>
+<text x="470" y="506" font-size="16" font-style="italic" fill="#57606a">“The bailiff checks line numbers, not command output or rubric math.”</text>
+<text x="470" y="540" font-size="20" font-weight="700" fill="#1f2328">The On-Call<tspan fill="#57606a" font-weight="400"> · Ops</tspan></text>
+<text x="1140" y="540" font-size="22" font-weight="800" text-anchor="end" fill="#2f855a">8.5</text>
+<rect x="470" y="550" width="670" height="8" rx="4" fill="#eee3d6"/>
+<rect x="470" y="550" width="569.5" height="8" rx="4" fill="#2f855a"/>
+<text x="470" y="576" font-size="16" font-style="italic" fill="#57606a">“Timeouts on every git call, and a python3 that Windows may not have.”</text>
+<text x="60" y="612" font-size="15" fill="#57606a">Roast the code, never the people. Every jab comes with evidence and a fix.</text>
+<text x="1140" y="612" font-size="15" font-weight="700" fill="#d9480f" text-anchor="end">repo-roast-skill</text>
+</g></svg>
